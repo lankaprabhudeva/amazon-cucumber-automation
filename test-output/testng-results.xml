@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="1" failed="4" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-07-24T17:41:29 IST" name="Default suite" finished-at="2025-07-24T17:42:19 IST" duration-ms="49603">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@66d18979]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2025-07-24T17:41:29 IST" name="Default test" finished-at="2025-07-24T17:42:19 IST" duration-ms="49603">
+      <class name="runner.TestRunner">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runner.TestRunner@66d18979]" started-at="2025-07-24T17:41:29 IST" name="setUpClass" finished-at="2025-07-24T17:41:30 IST" duration-ms="1024" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@4391a2d8]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@66d18979]" started-at="2025-07-24T17:41:30 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-07-24T17:41:47 IST" duration-ms="16568" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Signup attempt with different mobile and password combinations"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Verify the Signup feature in Amazon Prime"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@66d18979]" started-at="2025-07-24T17:41:47 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-07-24T17:41:54 IST" duration-ms="7336" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Signup attempt with different mobile and password combinations"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Verify the Signup feature in Amazon Prime"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[❌ Password page did not load.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: ❌ Password page did not load.
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.assertTrue(Assert.java:42)
+at Stepdefpack.StepDefinition.the_user_is_redirected_to_the_password_entry_page(StepDefinition.java:41)
+at ✽.the user is redirected to the password entry page(file:///C:/Users/ADMIN/eclipse-workspace_new/Cucumber-pro/src/test/resources/features/prime.feature:8)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@66d18979]" started-at="2025-07-24T17:41:54 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-07-24T17:42:03 IST" duration-ms="8382" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Signup attempt with different mobile and password combinations"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Verify the Signup feature in Amazon Prime"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[❌ Password page did not load.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: ❌ Password page did not load.
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.assertTrue(Assert.java:42)
+at Stepdefpack.StepDefinition.the_user_is_redirected_to_the_password_entry_page(StepDefinition.java:41)
+at ✽.the user is redirected to the password entry page(file:///C:/Users/ADMIN/eclipse-workspace_new/Cucumber-pro/src/test/resources/features/prime.feature:8)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@66d18979]" started-at="2025-07-24T17:42:03 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-07-24T17:42:10 IST" duration-ms="7489" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Signup attempt with different mobile and password combinations"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Verify the Signup feature in Amazon Prime"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[❌ Password page did not load.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: ❌ Password page did not load.
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.assertTrue(Assert.java:42)
+at Stepdefpack.StepDefinition.the_user_is_redirected_to_the_password_entry_page(StepDefinition.java:41)
+at ✽.the user is redirected to the password entry page(file:///C:/Users/ADMIN/eclipse-workspace_new/Cucumber-pro/src/test/resources/features/prime.feature:8)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.TestRunner@66d18979]" started-at="2025-07-24T17:42:10 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-07-24T17:42:19 IST" duration-ms="8531" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Signup attempt with different mobile and password combinations"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Verify the Signup feature in Amazon Prime"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[❌ Password page did not load.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: ❌ Password page did not load.
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.assertTrue(Assert.java:42)
+at Stepdefpack.StepDefinition.the_user_is_redirected_to_the_password_entry_page(StepDefinition.java:41)
+at ✽.the user is redirected to the password entry page(file:///C:/Users/ADMIN/eclipse-workspace_new/Cucumber-pro/src/test/resources/features/prime.feature:8)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runner.TestRunner@66d18979]" started-at="2025-07-24T17:42:19 IST" name="tearDownClass" finished-at="2025-07-24T17:42:19 IST" duration-ms="136" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- runner.TestRunner -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
