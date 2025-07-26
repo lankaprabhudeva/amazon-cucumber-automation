@@ -38,7 +38,7 @@ public class StepDefinition {
     @Then("the user is redirected to the password entry page")
     public void the_user_is_redirected_to_the_password_entry_page() {
         boolean loaded = pa.verifyPasswordPageLoaded();
-        assertTrue("❌ Password page did not load.", loaded);
+        assertTrue(" Password page did not load.", loaded);
     }
 
     @Then("enters the password in the {string} field")
@@ -49,8 +49,8 @@ public class StepDefinition {
     @Then("the user should see {string}")
     public void the_user_should_see(String expectedMessage) {
         String actualMessage = pa.getPageStatusOrError();
-        System.out.println("✅ Actual message: " + actualMessage);
-        assertTrue("❌ Expected to see: '" + expectedMessage + "', but got: '" + actualMessage + "'",
+        System.out.println("Actual message: " + actualMessage);
+        assertTrue("Expected to see: '" + expectedMessage + "', but got: '" + actualMessage + "'",
                 actualMessage.contains(expectedMessage));
     }
 }

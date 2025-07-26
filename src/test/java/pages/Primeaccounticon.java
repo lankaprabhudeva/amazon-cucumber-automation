@@ -1,6 +1,10 @@
 package pages;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.*;
@@ -18,6 +22,7 @@ public class Primeaccounticon {
     }
 
     // Elements
+
     @FindBy(xpath = "(//button[@data-testid='pv-nav-account-and-profiles-dropdown-trigger']//span[@data-testid='inactive-profile-placeholder'])[1]")
     WebElement mouseHoverIcon;
 
@@ -45,29 +50,25 @@ public class Primeaccounticon {
     @FindBy(xpath = "//*[@id='auth-error-message-box']//div[@id='auth-error-message-box']//span")
     WebElement genericError;
 
-    // ---------- Actions ----------
+    // Actions
 
     public void mouseHoverAtIcon(String iconLabel) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOf(mouseHoverIcon));
+        waitForVisibility(mouseHoverIcon, 20);
         action.moveToElement(mouseHoverIcon).perform();
     }
 
     public void mouseHoverAndClick(String label) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(mouseHoverSignIn));
+        waitForVisibility(mouseHoverSignIn, 10);
         action.moveToElement(mouseHoverSignIn).click().perform();
     }
 
     public void enterMobileNumber(String number) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(mobileNumberField));
+        waitForVisibility(mobileNumberField, 10);
         mobileNumberField.clear();
         mobileNumberField.sendKeys(number);
     }
 
     public void clickButton(String buttonName) {
-        // Add dynamic logic if needed
         if (buttonName.equalsIgnoreCase("Continue")) {
             continueButton.click();
         } else if (buttonName.equalsIgnoreCase("Sign In")) {
@@ -76,23 +77,37 @@ public class Primeaccounticon {
     }
 
     public void enterPassword(String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(passwordField));
+        waitForVisibility(passwordField, 10);
         passwordField.clear();
         passwordField.sendKeys(password);
     }
 
     public boolean verifyPasswordPageLoaded() {
         try {
-            return passwordField.isDisplayed();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOf(passwordField),
+                ExpectedConditions.urlContains("/ap/signin")
+            ));
+
+            boolean visible = passwordField.isDisplayed();
+            System.out.println("Password field visible: " + visible);
+            return visible;
+        } catch (TimeoutException e) {
+            System.out.println("Password field not visible within timeout.");
+            System.out.println("Current URL: " + driver.getCurrentUrl());
+            System.out.println("Page Title: " + driver.getTitle());
+            captureScreenshot("password_page_failure");
+            return false;
         } catch (Exception e) {
+            System.out.println("Unexpected error: " + e.getMessage());
+            captureScreenshot("password_page_exception");
             return false;
         }
     }
 
     public String getPageStatusOrError() {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             if (genericError.isDisplayed()) {
                 return genericError.getText().trim();
             } else if (usernameMissingError.isDisplayed()) {
@@ -101,14 +116,31 @@ public class Primeaccounticon {
                 return passwordMissingError.getText().trim();
             }
         } catch (Exception e) {
-            // No error displayed
+            // No error message found
         }
 
         try {
-            // Fallback success check: return title or URL
-            return driver.getTitle(); // or driver.getCurrentUrl();
+            return driver.getTitle();
         } catch (Exception ignored) {}
 
         return "Unknown state";
+    }
+
+    // Helper Methods
+
+    private void waitForVisibility(WebElement element, int seconds) {
+        new WebDriverWait(driver, Duration.ofSeconds(seconds))
+                .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    private void captureScreenshot(String filename) {
+        try {
+            File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File dest = new File("target/screenshots/" + filename + ".png");
+            FileUtils.copyFile(src, dest);
+            System.out.println("Screenshot saved: " + dest.getAbsolutePath());
+        } catch (IOException e) {
+            System.out.println("Failed to capture screenshot: " + e.getMessage());
+        }
     }
 }

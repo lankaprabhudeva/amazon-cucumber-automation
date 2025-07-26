@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven 3.8.6'   // You must install this in Jenkins tools config
+        jdk 'Java 11'         // Or whatever Java you use
+    }
+
+    stages {
+        stage('Build and Run Tests') {
+            steps {
+                dir('C:/Users/ADMIN/eclipse-workspace_new/Cucumber-pro') {
+                    bat 'mvn clean test'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+            archiveArtifacts artifacts: '**/target/**'
+        }
+    }
+}
