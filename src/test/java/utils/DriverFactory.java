@@ -7,11 +7,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 
-    private static WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver initDriver() {
-        if (driver != null) {
-            return driver;
+        if (driver.get() != null) {
+            return driver.get();
         }
 
         WebDriverManager.chromedriver().setup();
@@ -19,27 +19,33 @@ public class DriverFactory {
 
         if (isHeadless()) {
             System.out.println("[INFO] Running in headless mode");
-            options.addArguments("--headless=new", "--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage", "--window-size=1920,1080");
+            options.addArguments("--headless=new", "--disable-gpu", "--no-sandbox",
+                    "--disable-dev-shm-usage", "--window-size=1920,1080");
         }
 
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+        WebDriver localDriver = new ChromeDriver(options);
+        localDriver.manage().window().maximize();
+        driver.set(localDriver);
 
-        Runtime.getRuntime().addShutdownHook(new Thread(DriverFactory::quitDriver));
-        return driver;
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            quitDriver();
+        }));
+
+        return driver.get();
     }
 
     public static WebDriver getDriver() {
-        if (driver == null) {
-            throw new IllegalStateException("Driver not initialized. Call initDriver() first.");
+        if (driver.get() == null) {
+            throw new IllegalStateException("WebDriver not initialized. Call initDriver() first.");
         }
-        return driver;
+        return driver.get();
     }
 
     public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
+        WebDriver currentDriver = driver.get();
+        if (currentDriver != null) {
+            currentDriver.quit();
+            driver.remove();
         }
     }
 

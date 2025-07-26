@@ -1,11 +1,8 @@
-# Stage 1: Build with Maven
+# Stage 1: Build the project with tests
 FROM maven:3.9.4-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
-RUN mvn clean package -DskipTests
+RUN mvn clean test
 
-# Stage 2: Run the app
-FROM eclipse-temurin:17
-WORKDIR /app
-COPY --from=build /app/target/Cucumber-pro-0.0.1-SNAPSHOT.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Optional: You can use a lightweight image for logs/output
+# But for simplicity, we just stay in the same layer and print logs directly
