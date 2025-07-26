@@ -1,10 +1,11 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven_3.9.9'
-        jdk 'JDK_17'
-    }
+   tools {
+    maven 'Maven 3.9.9'
+    jdk 'JDK17'
+}
+
 
     stages {
         stage('Checkout Code') {
